@@ -29,17 +29,13 @@
 ### Таблица `books`:
 - `id` (primary key)
 - `title`
-- `description`
-- `published_year`
+- `author_id`
+- `price`
 
 ### Таблица `authors`:
 - `id` (primary key)
 - `name`
-- `bio`
 
-### Таблица `book_authors` (для связи многие-к-ногим):
-- `book_id` (foreign key)
-- `author_id` (foreign key)
 
 ## Дополнительные возможности:
 - Поиск книг по названию или автору.

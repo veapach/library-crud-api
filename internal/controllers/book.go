@@ -23,3 +23,27 @@ func CreateBook(c *gin.Context) {
 	database.DB.Create(&book)
 	c.JSON(http.StatusOK, book)
 }
+
+func GetBookById(c *gin.Context) {
+	id := c.Param("id")
+	var book models.Book
+
+	if err := database.DB.First(&book, id).Error; err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Book not found"})
+		return
+	}
+
+	c.JSON(http.StatusOK, book)
+
+}
+
+func DeleteBookById(c *gin.Context) {
+	id := c.Param("id")
+	var book models.Book
+
+	if err := database.DB.Delete(&book, id).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete book"})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "Book deleted successfully"})
+}
